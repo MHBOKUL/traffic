@@ -1,0 +1,111 @@
+{% extends "traffic/base.html" %}
+
+{% block title %}Fine Details{% endblock title %}
+
+{% block content %}
+<style>
+  /* Styling for container and cards */
+  .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center; /* Center the cards */
+      gap: 20px;
+      margin-top: 20px;
+  }
+
+  .card {
+      background: linear-gradient(to bottom, #87CEEB, #B0E2FF); /* Blue sky gradient */
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 300px; /* Fixed card width */
+      text-align: center; /* Centered text */
+      transition: transform 0.3s, box-shadow 0.3s;
+      color: #000; /* Dark text for readability */
+  }
+
+  .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .card h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+  }
+
+  .card p {
+      font-size: 14px;
+      margin-bottom: 5px;
+      color: #333; /* Slightly darker text */
+  }
+
+  /* Styling for the search form */
+  .search-form {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+      gap: 10px;
+  }
+
+  .search-form input, .search-form button {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      box-sizing: border-box; /* Ensure consistent sizing */
+  }
+
+  .search-form button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+  }
+
+  .search-form button:hover {
+      background-color: #0056b3;
+  }
+</style>
+
+<div>
+  <h1 class="text-center">Fine Details</h1>
+
+  {% if message %}
+  <p class="text-center text-danger">{{ message }}</p>
+  {% endif %}
+
+  <!-- Search Form -->
+  <form method="GET" action="{% url 'fine_details' %}" class="search-form">
+      <div>
+          <label for="dob">Date of Birth:</label>
+          <input type="date" id="dob" name="dob" required>
+      </div>
+      <div>
+          <label for="nid">National ID:</label>
+          <input type="text" id="nid" name="nid" required>
+      </div>
+      <button type="submit">Search</button>
+  </form>
+
+  <hr>
+
+  <!-- Card Layout -->
+  <div class="card-container">
+      {% for fine in fine_details %}
+      <div class="card">
+          <h3>Licence Number: {{ fine.licence_number.licence_number }}</h3>
+          <p><strong>Violation Type:</strong> {{ fine.violation_type }}</p>
+          <p><strong>Violation Time:</strong> {{ fine.violation_time }}</p>
+          <p><strong>Violation Location:</strong> {{ fine.violation_location }}</p>
+      </div>
+      {% empty %}
+      <p class="text-center">No fines found for the given DOB and NID.</p>
+      {% endfor %}
+  </div>
+</div>
+{% endblock content %}

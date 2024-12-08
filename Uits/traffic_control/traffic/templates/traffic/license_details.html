@@ -1,0 +1,79 @@
+{% extends "traffic/base.html" %}
+
+{% block title %}Licence Details{% endblock title %}
+
+{% block content %}
+<div class="card mt-4" style="background-color: skyblue; color: black; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); max-width: 800px; margin: 0 auto;">
+    <h1 style="text-align: center;">Owner Details</h1>
+    <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+        <tr>
+            <th style="text-align: left; padding: 8px; border: 1px solid #ddd;">Attribute</th>
+            <th style="text-align: left; padding: 8px; border: 1px solid #ddd;">Details</th>
+        </tr>
+        <tr>
+            <td style="padding: 8px; border: 1px solid #ddd;"><strong>Name</strong></td>
+            <td style="padding: 8px; border: 1px solid #ddd;">{{ owner.name }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 8px; border: 1px solid #ddd;"><strong>Age</strong></td>
+            <td style="padding: 8px; border: 1px solid #ddd;">{{ owner.age }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 8px; border: 1px solid #ddd;"><strong>DOB</strong></td>
+            <td style="padding: 8px; border: 1px solid #ddd;">{{ owner.dob }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 8px; border: 1px solid #ddd;"><strong>NID</strong></td>
+            <td style="padding: 8px; border: 1px solid #ddd;">{{ owner.nid }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 8px; border: 1px solid #ddd;"><strong>Present Address</strong></td>
+            <td style="padding: 8px; border: 1px solid #ddd;">{{ owner.present_address }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 8px; border: 1px solid #ddd;"><strong>Permanent Address</strong></td>
+            <td style="padding: 8px; border: 1px solid #ddd;">{{ owner.permanent_address }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 8px; border: 1px solid #ddd;"><strong>Phone Number</strong></td>
+            <td style="padding: 8px; border: 1px solid #ddd;">{{ owner.phone_number }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 8px; border: 1px solid #ddd;"><strong>Email</strong></td>
+            <td style="padding: 8px; border: 1px solid #ddd;">{{ owner.email }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 8px; border: 1px solid #ddd;"><strong>Licence Number</strong></td>
+            <td style="padding: 8px; border: 1px solid #ddd;">{{ owner.licence_number }}</td>
+        </tr>
+    </table>
+
+    <h1 style="text-align: center;">Fine Details</h1>
+    <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+        <tr>
+            <th style="text-align: left; padding: 8px; border: 1px solid #ddd;">Violation Type</th>
+            <th style="text-align: left; padding: 8px; border: 1px solid #ddd;">Violation Time</th>
+            <th style="text-align: left; padding: 8px; border: 1px solid #ddd;">Violation Location</th>
+        </tr>
+        {% for fine in fine_details %}
+        <tr>
+            <td style="padding: 8px; border: 1px solid #ddd;">{{ fine.violation_type }}</td>
+            <td style="padding: 8px; border: 1px solid #ddd;">{{ fine.violation_time }}</td>
+            <td style="padding: 8px; border: 1px solid #ddd;">{{ fine.violation_location }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h1 style="text-align: center;">Expiry Details</h1>
+    <table style="width: 100%; border-collapse: collapse;">
+        <tr>
+            <th style="text-align: left; padding: 8px; border: 1px solid #ddd;">Attribute</th>
+            <th style="text-align: left; padding: 8px; border: 1px solid #ddd;">Details</th>
+        </tr>
+        <tr>
+            <td style="padding: 8px; border: 1px solid #ddd;"><strong>Expiry Date</strong></td>
+            <td style="padding: 8px; border: 1px solid #ddd;">{{ expiry_details.expiry_date }}</td>
+        </tr>
+    </table>
+</div>
+{% endblock content %}

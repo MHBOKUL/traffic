@@ -1,0 +1,98 @@
+{% extends "traffic/base.html" %}
+
+{% block title %}Contact Us{% endblock title %}
+
+{% block content %}
+<style>
+    body {
+        background: linear-gradient(270deg, #ff9a9e, #fad0c4, #fbc2eb);
+        background-size: 400% 400%;
+        animation: gradientBG 10s ease infinite;
+    }
+
+    @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .contact-card {
+        margin: 50px auto;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        max-width: 500px;
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+
+    form label {
+        display: block;
+        margin: 10px 0 5px;
+        font-weight: bold;
+    }
+
+    form input, form textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    form button {
+        width: 100%;
+        padding: 10px;
+        background: linear-gradient(90deg, #00c6ff, #0072ff);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    form button:hover {
+        background: linear-gradient(90deg, #0072ff, #00c6ff);
+    }
+
+    .success-message {
+        color: green;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .error-message {
+        color: red;
+        text-align: center;
+        font-weight: bold;
+    }
+</style>
+
+<div class="contact-card">
+    <h1>Contact Us</h1>
+
+    {% if success %}
+    <p class="success-message">Your message has been sent successfully!</p>
+    {% elif error %}
+    <p class="error-message">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+        <label>Name:</label>
+        <input type="text" name="name" required>
+        <label>Email:</label>
+        <input type="email" name="email" required>
+        <label>Phone:</label>
+        <input type="text" name="phone">
+        <label>Message:</label>
+        <textarea name="message" rows="5" required></textarea>
+        <button type="submit">Send</button>
+    </form>
+</div>
+{% endblock content %}
